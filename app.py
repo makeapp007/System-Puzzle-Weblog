@@ -10,7 +10,7 @@ app.secret_key = os.environ['APP_SECRET_KEY']
 @app.route("/", methods=('GET', 'POST'))
 def index():
     # Connect to database
-    conn = psycopg2.connect(host='db', database=os.environ['POSTGRES_DB'], user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
+    conn = psycopg2.connect(host='system-puzzle-weblog_db_1', database=os.environ['POSTGRES_DB'], user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
     cur = conn.cursor()
 
     # Get number of all GET requests

@@ -25,7 +25,7 @@ channel = connection.channel()
 channel.queue_declare(queue='log-analysis')
 
 # Connect to PostgreSQL database
-conn = psycopg2.connect(host='db', database=os.environ['POSTGRES_DB'], user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
+conn = psycopg2.connect(host='system-puzzle-weblog_db_1', database=os.environ['POSTGRES_DB'], user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
 cur = conn.cursor()
 
 
