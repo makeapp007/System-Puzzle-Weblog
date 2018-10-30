@@ -1,13 +1,10 @@
 #!/bin/bash
 set -e
 
-psql -v ON_ERROR_STOP=1 --username dbuser --dbname webserver <<-EOSQL
-        CREATE USER dbuser WITH PASSWORD 'secure';
-        create database webserver;
-        GRANT ALL PRIVILEGES ON DATABASE webserver TO dbuser;
-
+psql -v ON_ERROR_STOP=1 --username dbusr --dbname webserver <<-EOSQL
         CREATE TABLE  weblogs (
                day    date,
-               status varchar(3)
+               status varchar(3),
+               source varchar(6)
                );
 EOSQL

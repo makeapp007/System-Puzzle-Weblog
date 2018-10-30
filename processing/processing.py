@@ -25,15 +25,15 @@ channel = connection.channel()
 channel.queue_declare(queue='log-analysis')
 
 # Connect to PostgreSQL database
-conn = psycopg2.connect(host='system-puzzle-weblog_db_1', database=os.environ['POSTGRES_DB'], user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
+conn = psycopg2.connect(host='db', database=os.environ['POSTGRES_DB'], user=os.environ['POSTGRES_USER'], password=os.environ['POSTGRES_PASSWORD'])
 cur = conn.cursor()
 
 
 # main function that reads from RabbitMQ queue and stores it in database
 def callback(ch, method, properties, body):
     msg = json.loads(body)
-    values = "to_date(\'" + msg['day'] + "\', \'YYYY-MM-DD\')" + ", " + msg['status']
-    sql = """INSERT INTO weblogs (day, status)
+    values = "to_date(\'" + msg['day'] + "\', \'YYYY-MM-DD\')" + ", " + msg['status']+", \'"+msg['source'] +"\'"
+    sql = """INSERT INTO weblogs (day, status,source)
              VALUES (%s);""" % values
     cur.execute(sql, body)
     conn.commit()

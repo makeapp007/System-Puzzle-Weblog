@@ -27,7 +27,6 @@ services:
     env_file:
      - env_file
     ports:
-      - "15672:15672"
       - "5672:5672"
     labels:
       NAME: "rabbitmq"
@@ -42,8 +41,6 @@ services:
     restart: on-failure
     depends_on:
       - rabbit
-    ports:
-     - "82:5672"
   processing:
     build: processing/.
     env_file:
@@ -54,12 +51,10 @@ services:
     restart: on-failure
     depends_on:
       - rabbit
-    ports:
-     - "81:5672"
   nginx:
     image: "nginx:1.13.5"
     ports:
-      - "80:8080"
+      - "8080:80"
     volumes:
       - ./conf.d:/etc/nginx/conf.d
     networks:

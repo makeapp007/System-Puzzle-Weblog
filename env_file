@@ -1,4 +1,4 @@
-POSTGRES_USER=dbuser
+POSTGRES_USER=dbusr
 POSTGRES_PASSWORD=secure
 POSTGRES_DB=webserver
 APP_SECRET_KEY=super_duper_secret
